@@ -1,0 +1,18 @@
+# Grade 3x3 conectada horizontal e verticalmente
+inicio=A1
+objetivo=C3
+
+A1 A2 1
+A2 A3 1
+B1 B2 1
+B2 B3 1
+C1 C2 1
+C2 C3 1
+
+A1 B1 1
+A2 B2 1
+A3 B3 1
+B1 C1 1
+B2 C2 1
+B3 C3 1
+

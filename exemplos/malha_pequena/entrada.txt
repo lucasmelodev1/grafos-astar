@@ -1,0 +1,12 @@
+# Pequena malha com vários caminhos
+inicio=A
+objetivo=F
+
+A B 1
+A C 4
+B D 2
+C D 1
+C E 3
+D F 5
+E F 1
+

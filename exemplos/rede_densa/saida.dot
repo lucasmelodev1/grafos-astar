@@ -1,0 +1,21 @@
+digraph G {
+  rankdir=LR;
+  node [shape=circle];
+  "N1" [style=filled, fillcolor=green];
+  "N10" [style=filled, fillcolor=red];
+  "N2" -> "N3" [label="1.00", style=solid, color=black];
+  "N2" -> "N5" [label="2.00", style=solid, color=black];
+  "N3" -> "N4" [label="2.00", style=solid, color=black];
+  "N3" -> "N6" [label="4.00", style=bold, color=green];
+  "N5" -> "N8" [label="4.00", style=solid, color=black];
+  "N6" -> "N9" [label="2.00", style=bold, color=green];
+  "N8" -> "N9" [label="1.00", style=solid, color=black];
+  "N8" -> "N10" [label="5.00", style=solid, color=black];
+  "N9" -> "N10" [label="2.00", style=bold, color=green];
+  "N1" -> "N2" [label="5.00", style=solid, color=black];
+  "N1" -> "N3" [label="3.00", style=bold, color=green];
+  "N1" -> "N4" [label="9.00", style=solid, color=black];
+  "N4" -> "N5" [label="3.00", style=solid, color=black];
+  "N4" -> "N7" [label="6.00", style=solid, color=black];
+  "N7" -> "N9" [label="3.00", style=solid, color=black];
+}

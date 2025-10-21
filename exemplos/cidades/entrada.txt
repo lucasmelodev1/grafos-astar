@@ -1,0 +1,15 @@
+# Grafo de cidades fictícias com distâncias variadas
+inicio=Artemis
+objetivo=Solaria
+
+Artemis Boreal 7
+Artemis Lumen 9
+Boreal Delta 10
+Boreal Elara 15
+Lumen Delta 11
+Lumen Nova 2
+Nova Elara 6
+Nova Vega 3
+Vega Solaria 5
+Elara Solaria 9
+

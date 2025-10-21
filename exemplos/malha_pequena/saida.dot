@@ -1,0 +1,13 @@
+digraph G {
+  rankdir=LR;
+  node [shape=circle];
+  "A" [style=filled, fillcolor=green];
+  "F" [style=filled, fillcolor=red];
+  "A" -> "B" [label="1.00", style=bold, color=green];
+  "A" -> "C" [label="4.00", style=solid, color=black];
+  "B" -> "D" [label="2.00", style=bold, color=green];
+  "C" -> "D" [label="1.00", style=solid, color=black];
+  "C" -> "E" [label="3.00", style=solid, color=black];
+  "D" -> "F" [label="5.00", style=bold, color=green];
+  "E" -> "F" [label="1.00", style=solid, color=black];
+}
