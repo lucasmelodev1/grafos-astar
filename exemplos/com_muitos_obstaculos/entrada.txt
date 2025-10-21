@@ -1,0 +1,45 @@
+# EXEMPLO GRANDE COM OBSTÁCULOS
+inicio=A
+objetivo=O
+
+# Conexões principais (um mapa tipo grade com atalhos)
+A B 1
+A F 2
+B C 1
+B G 2
+C D 1
+C H 2
+D E 1
+D I 2
+E J 2
+
+F G 1
+F K 2
+G H 1
+G L 2
+H I 1
+H M 2
+I J 1
+I N 2
+J O 2
+
+K L 1
+L M 1
+M N 1
+N O 1
+
+# Caminhos diagonais (atalhos)
+A G 2.5
+B H 2.5
+C I 2.5
+D J 2.5
+F L 2.5
+G M 2.5
+H N 2.5
+I O 2.5
+
+# OBSTÁCULOS
+obstaculo=C
+obstaculo=M
+obstaculo=N
+

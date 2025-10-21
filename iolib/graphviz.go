@@ -10,23 +10,24 @@ func custoEInfinito(c float64) bool {
 	return c != c || c > 1e9
 }
 
-func GerarGraphviz(grafo dsa.Grafo, caminho []dsa.No, inicio, objetivo dsa.No) string {
+func GerarGraphviz(grafo dsa.Grafo, caminho []dsa.No, inicio, objetivo dsa.No, obstaculos map[dsa.No]bool) string {
 	var sb strings.Builder
-	sb.WriteString("digraph G {\n")
-	sb.WriteString("  rankdir=LR;\n")
-	sb.WriteString("  node [shape=circle];\n")
+	sb.WriteString("digraph G {\n  rankdir=LR;\n  node [shape=circle];\n")
 
+	// Cores especiais
 	sb.WriteString(fmt.Sprintf("  \"%s\" [style=filled, fillcolor=green];\n", inicio))
 	sb.WriteString(fmt.Sprintf("  \"%s\" [style=filled, fillcolor=red];\n", objetivo))
 
-	// Cria um mapa rápido das arestas do caminho
+	for no := range obstaculos {
+		sb.WriteString(fmt.Sprintf("  \"%s\" [style=filled, fillcolor=gray, fontcolor=white];\n", no))
+	}
+
 	caminhoArestas := make(map[string]bool)
 	for i := 0; i < len(caminho)-1; i++ {
 		key := string(caminho[i]) + "->" + string(caminho[i+1])
 		caminhoArestas[key] = true
 	}
 
-	// Cria arestas
 	for origem, arestas := range grafo {
 		for _, a := range arestas {
 			key := string(origem) + "->" + string(a.Para)
@@ -38,10 +39,13 @@ func GerarGraphviz(grafo dsa.Grafo, caminho []dsa.No, inicio, objetivo dsa.No) s
 				color = "green"
 			}
 
-			sb.WriteString(fmt.Sprintf(
-				"  \"%s\" -> \"%s\" [label=\"%.2f\", style=%s, color=%s];\n",
-				origem, a.Para, a.Custo, style, color,
-			))
+			if obstaculos[a.Para] || obstaculos[origem] {
+				color = "gray"
+				style = "dashed"
+			}
+
+			sb.WriteString(fmt.Sprintf("  \"%s\" -> \"%s\" [label=\"%.2f\", style=%s, color=%s];\n",
+				origem, a.Para, a.Custo, style, color))
 		}
 	}
 

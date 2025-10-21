@@ -3,14 +3,14 @@ digraph G {
   node [shape=circle];
   "Artemis" [style=filled, fillcolor=green];
   "Solaria" [style=filled, fillcolor=red];
+  "Nova" -> "Elara" [label="6.00", style=solid, color=black];
+  "Nova" -> "Vega" [label="3.00", style=bold, color=green];
+  "Vega" -> "Solaria" [label="5.00", style=bold, color=green];
+  "Elara" -> "Solaria" [label="9.00", style=solid, color=black];
   "Artemis" -> "Boreal" [label="7.00", style=solid, color=black];
   "Artemis" -> "Lumen" [label="9.00", style=bold, color=green];
   "Boreal" -> "Delta" [label="10.00", style=solid, color=black];
   "Boreal" -> "Elara" [label="15.00", style=solid, color=black];
   "Lumen" -> "Delta" [label="11.00", style=solid, color=black];
   "Lumen" -> "Nova" [label="2.00", style=bold, color=green];
-  "Nova" -> "Elara" [label="6.00", style=solid, color=black];
-  "Nova" -> "Vega" [label="3.00", style=bold, color=green];
-  "Vega" -> "Solaria" [label="5.00", style=bold, color=green];
-  "Elara" -> "Solaria" [label="9.00", style=solid, color=black];
 }

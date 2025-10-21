@@ -3,6 +3,9 @@ digraph G {
   node [shape=circle];
   "A1" [style=filled, fillcolor=green];
   "C3" [style=filled, fillcolor=red];
+  "C1" -> "C2" [label="1.00", style=solid, color=black];
+  "C2" -> "C3" [label="1.00", style=solid, color=black];
+  "A3" -> "B3" [label="1.00", style=solid, color=black];
   "B3" -> "C3" [label="1.00", style=bold, color=green];
   "A1" -> "A2" [label="1.00", style=bold, color=green];
   "A1" -> "B1" [label="1.00", style=solid, color=black];
@@ -12,7 +15,4 @@ digraph G {
   "B1" -> "C1" [label="1.00", style=solid, color=black];
   "B2" -> "B3" [label="1.00", style=bold, color=green];
   "B2" -> "C2" [label="1.00", style=solid, color=black];
-  "C1" -> "C2" [label="1.00", style=solid, color=black];
-  "C2" -> "C3" [label="1.00", style=solid, color=black];
-  "A3" -> "B3" [label="1.00", style=solid, color=black];
 }

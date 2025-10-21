@@ -1,0 +1,12 @@
+# Grafo simples com obstáculos
+inicio=A
+objetivo=F
+
+A B 2
+A C 1
+B D 3
+C D 1
+D E 1
+E F 2
+
+obstaculo=D

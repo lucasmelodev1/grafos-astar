@@ -10,15 +10,16 @@ import (
 )
 
 // LerGrafoDoArquivo lê grafo de arquivo e já faz TrimSpace em tudo
-func LerGrafoDoArquivo(nome string) (dsa.Grafo, dsa.No, dsa.No, error) {
+func LerGrafoDoArquivo(nome string) (dsa.Grafo, dsa.No, dsa.No, map[dsa.No]bool, error) {
 	file, err := os.Open(nome)
 	if err != nil {
-		return nil, "", "", err
+		return nil, "", "", nil, err
 	}
 	defer file.Close()
 
 	grafo := make(dsa.Grafo)
 	var inicio, objetivo dsa.No
+	obstaculos := make(map[dsa.No]bool)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -27,39 +28,32 @@ func LerGrafoDoArquivo(nome string) (dsa.Grafo, dsa.No, dsa.No, error) {
 			continue
 		}
 
-		if strings.HasPrefix(linha, "inicio=") {
+		switch {
+		case strings.HasPrefix(linha, "inicio="):
 			inicio = dsa.No(strings.TrimSpace(strings.TrimPrefix(linha, "inicio=")))
-			continue
-		}
-		if strings.HasPrefix(linha, "fim=") || strings.HasPrefix(linha, "objetivo=") {
-			objetivo = dsa.No(strings.TrimSpace(strings.TrimPrefix(linha, "fim=")))
-			if strings.HasPrefix(linha, "objetivo=") {
-				objetivo = dsa.No(strings.TrimSpace(strings.TrimPrefix(linha, "objetivo=")))
+		case strings.HasPrefix(linha, "fim=") || strings.HasPrefix(linha, "objetivo="):
+			val := strings.SplitN(linha, "=", 2)[1]
+			objetivo = dsa.No(strings.TrimSpace(val))
+		case strings.HasPrefix(linha, "obstaculo="):
+			val := strings.SplitN(linha, "=", 2)[1]
+			obstaculos[dsa.No(strings.TrimSpace(val))] = true
+		default:
+			partes := strings.Fields(linha)
+			if len(partes) != 3 {
+				continue
 			}
-			continue
+			custo, err := strconv.ParseFloat(strings.TrimSpace(partes[2]), 64)
+			if err != nil {
+				fmt.Println("⚠️  Erro ao converter custo:", partes[2])
+				continue
+			}
+			origem := dsa.No(strings.TrimSpace(partes[0]))
+			destino := dsa.No(strings.TrimSpace(partes[1]))
+			grafo[origem] = append(grafo[origem], dsa.Aresta{Para: destino, Custo: custo})
 		}
-
-		// Linha de aresta: origem destino custo
-		partes := strings.Fields(linha)
-		if len(partes) != 3 {
-			continue
-		}
-
-		custo, err := strconv.ParseFloat(strings.TrimSpace(partes[2]), 64)
-		if err != nil {
-			fmt.Println("⚠️  Erro ao converter custo:", partes[2])
-			continue
-		}
-
-		origem := dsa.No(strings.TrimSpace(partes[0]))
-		destino := dsa.No(strings.TrimSpace(partes[1]))
-
-		grafo[origem] = append(grafo[origem], dsa.Aresta{Para: destino, Custo: custo})
-
-		// grafo[destino] = append(grafo[destino], dsa.Aresta{Para: origem, Custo: custo})
 	}
 
-	return grafo, inicio, objetivo, scanner.Err()
+	return grafo, inicio, objetivo, obstaculos, scanner.Err()
 }
 
 func SalvarSaida(caminho, conteudo string) error {
