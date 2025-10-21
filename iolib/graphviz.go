@@ -6,8 +6,8 @@ import (
 	"strings"
 )
 
-func custoEsInfinito(c float64) bool {
-	return c != c || c > 1e9 // NaN ou infinito
+func custoEInfinito(c float64) bool {
+	return c != c || c > 1e9
 }
 
 func GerarGraphviz(grafo dsa.Grafo, caminho []dsa.No, inicio, objetivo dsa.No) string {
@@ -16,7 +16,6 @@ func GerarGraphviz(grafo dsa.Grafo, caminho []dsa.No, inicio, objetivo dsa.No) s
 	sb.WriteString("  rankdir=LR;\n")
 	sb.WriteString("  node [shape=circle];\n")
 
-	// Destaca início e objetivo
 	sb.WriteString(fmt.Sprintf("  \"%s\" [style=filled, fillcolor=green];\n", inicio))
 	sb.WriteString(fmt.Sprintf("  \"%s\" [style=filled, fillcolor=red];\n", objetivo))
 

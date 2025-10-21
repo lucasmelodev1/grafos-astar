@@ -39,16 +39,13 @@ func main() {
 
 		fmt.Printf("Processando '%s' → Início: %s | Objetivo: %s\n", pasta.Name(), inicio, objetivo)
 
-		// A* com heurística zero (Dijkstra)
 		caminho, custo := dsa.AEstrela(grafo, inicio, objetivo, func(a, b dsa.No) float64 { return 0 })
 
-		// Salvar saída em TXT
 		err = iolib.SalvarSaida(saidaTxt, iolib.GerarRelatorio(pasta.Name(), caminho, custo))
 		if err != nil {
 			fmt.Println("Erro ao salvar TXT:", err)
 		}
 
-		// Salvar saída em DOT
 		err = iolib.SalvarSaida(saidaDot, iolib.GerarGraphviz(grafo, caminho, inicio, objetivo))
 		if err != nil {
 			fmt.Println("Erro ao salvar DOT:", err)

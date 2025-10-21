@@ -56,25 +56,22 @@ func LerGrafoDoArquivo(nome string) (dsa.Grafo, dsa.No, dsa.No, error) {
 
 		grafo[origem] = append(grafo[origem], dsa.Aresta{Para: destino, Custo: custo})
 
-		// Se quiser grafo não-direcionado, descomente:
 		// grafo[destino] = append(grafo[destino], dsa.Aresta{Para: origem, Custo: custo})
 	}
 
 	return grafo, inicio, objetivo, scanner.Err()
 }
 
-// SalvarSaida salva um arquivo com o conteúdo passado
 func SalvarSaida(caminho, conteudo string) error {
 	return os.WriteFile(caminho, []byte(conteudo), 0644)
 }
 
-// GerarRelatorio gera saída em texto
 func GerarRelatorio(nome string, caminho []dsa.No, custo float64) string {
 	var sb strings.Builder
 	sb.WriteString("════════════════════════════════════════════\n")
 	sb.WriteString(fmt.Sprintf("Exemplo: %s\n", nome))
 	sb.WriteString("────────────────────────────────────────────\n")
-	if len(caminho) == 0 || custo == 0 || custoEsInfinito(custo) {
+	if len(caminho) == 0 || custo == 0 || custoEInfinito(custo) {
 		sb.WriteString("Nenhum caminho encontrado.\n")
 	} else {
 		sb.WriteString(fmt.Sprintf("Caminho encontrado:\n  %v\n", caminho))
